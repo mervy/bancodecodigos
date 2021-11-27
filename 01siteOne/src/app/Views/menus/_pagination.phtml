@@ -1,0 +1,38 @@
+<!-- Start pagination-->
+
+<?php 
+if ($this->view->contar > 1):     
+    $pAtual = $this->view->atual;
+    $pTotal = $this->view->contar;
+    $pMax = 2;
+    $pUrl = "?page=";
+?>
+    <ul class="pagination justify-content-center mt-3">
+        <li class="page-item">
+            <a class="page-link" href="<?= $pUrl ?>1"><i class="fa fa-step-backward"></i></a>
+        </li>
+        <?php for ($pBefore = $pAtual - $pMax; $pBefore <= $pAtual - 1; $pBefore++): ?>
+            <?php if ($pBefore >= 1): ?>
+                <li class="page-item">
+                    <a class="page-link" href="<?= $pUrl . $pBefore ?>"><?= $pBefore ?></a>
+                </li>
+            <?php endif; ?>
+        <?php endfor; ?>
+        <li class="page-item active">
+            <a class="page-link" href="#"><?= $pAtual ?></a>
+        </li>
+        <?php for ($pAfter = $pAtual + 1; $pAfter <= $pAtual + $pMax; $pAfter++): ?>
+            <?php if ($pAfter <= $pTotal): ?>
+                <li class="page-item">
+                    <a class="page-link" href="<?= $pUrl . $pAfter ?>"><?= $pAfter ?></a>
+                </li>
+            <?php endif; ?>
+        <?php endfor; ?>
+        <li class="page-item">
+            <a class="page-link" href="<?= $pUrl . $pTotal ?>"><i class="fa fa-step-forward"></i></a>
+        </li>
+
+    </ul>
+<?php endif; ?>
+
+<!-- End pagination -->   

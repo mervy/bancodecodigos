@@ -1,0 +1,40 @@
+<?php $this->renderView('menus/_admin_page');?>
+<div class="container">
+    <div class="page-header">
+        <h2 class="card-title py-3">Newsletter</h2>
+    </div>
+
+    <?php if (!empty($this->view->news)): ?>
+    <table id="myTable" class="table table-striped custab sortable">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>E-mail</th>
+                <th>IP</th>
+                <th>Registered in</th>
+                <th class="text-center">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($this->view->news as $n): ?>
+            <tr>
+                <td><?= $n['id'] ?></td>
+                <td><?= $n['name'] ?></td>
+                <td><?= $n['email'] ?></td>
+                <td><?= $n['ip'] ?></td>
+                <td><?= $n['registered_in'] ?></td>
+                <td class="text-center">
+                    <a href="/admin/delete/newsletter/<?= $n['id'] ?>" class="btn btn-danger btn-xs" onclick="confirm('Tem certeza que quer excluir?')"><span class="glyphicon glyphicon-remove"></span> Del</a>
+                </td>
+            </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+    <?php else: ?>
+    <p>Não houve inscrições até agora!!</p>
+    <?php endif; ?>
+
+    <?php $this->renderView('menus/_pagination'); ?>
+    
+</div>

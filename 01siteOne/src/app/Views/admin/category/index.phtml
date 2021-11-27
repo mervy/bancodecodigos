@@ -1,0 +1,51 @@
+<?php $this->renderView('menus/_admin_page');?>
+<div class="container">
+    <div class="page-header">
+        <h2 class="card-title py-3">Categories</h2>
+    </div>
+    <?php
+$this->renderView('alerts/_errors');
+$this->renderView('alerts/_success');
+?>
+    <p class="text-end"><a href="/admin/create/category" class="btn btn-primary"><i class="fa fa-pencil"></i> Add new categories</a></p>
+
+    <?php if (!empty($this->view->categories)): ?>
+    <table class="table table-striped custab sortable">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Slug</th>
+                <th>Description</th>
+                <th class="text-center">Action</th>
+            </tr>
+        </thead>
+        <?php foreach ($this->view->categories as $cat): ?>
+        <tr>
+            <td><?= $cat['id'] ?></td>
+            <td><?= $cat['name'] ?></td>
+            <td><?= $cat['slug'] ?></td>
+            <td><?= $cat['description'] ?></td>
+            <td class="text-center" width="20%">
+                <a class='btn btn-info btn-xs' href="/admin/edit/category/<?= $cat['id'] ?>"><span class="fa fa-pencil-square-o"></span> Edit</a>
+                <script>
+                    function delCat(id) {
+                        var r = confirm("Tem certeza que quer deletar?");
+                        if (r == true) {
+                            window.location.href = "/admin/delete/category/" + id;
+                        } else {
+                            window.location.href = "/admin/show/category";
+                        }
+                    }
+                </script>
+                <button class="btn btn-danger btn-sm" onclick="delCat(<?= $cat['id'] ?>)"><i class="fa fa-trash-o"></i> Del</button>
+        </tr>
+        <?php endforeach; ?>
+    </table>
+    <?php else: ?>
+    <p>Não há categorias a listar!!</p>
+    <?php endif; ?>
+
+    <?php $this->renderView('menus/_pagination'); ?>
+    
+</div>

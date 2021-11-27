@@ -1,0 +1,73 @@
+@import "https://fonts.googleapis.com/css2?family=Parisienne&display=swap";
+@import "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css";
+
+/*Para a assinatura do rodape*/
+* {
+    font-family: 'Roboto', sans-serif;
+}
+
+.img-logo {
+    height: 6vh;
+}
+
+a {
+    text-decoration: none;
+    color: brown;
+}
+
+a:hover {
+    border-bottom: 1px dotted rgb(201, 218, 54);
+}
+
+.carousel-item {
+    height: 60vh;
+    min-height: 200px;
+    background: no-repeat center center scroll;
+    /*-webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;*/
+}
+
+@media screen and (min-width:250px) and (max-width: 1024px) {
+    .carousel-item {
+        height: 30vh;
+    }
+
+    .carousel-caption p {
+        display: none;
+    }
+}
+
+.nav-index {
+    margin: auto;
+}
+
+.map {
+    height: 25vh;
+    border: 0;
+}
+
+.categories li {
+    padding-bottom: 10px;
+}
+
+#signature {
+    font-family: 'Parisienne', cursive;
+    color: red;
+}
+
+article img {
+    float: left;
+    margin: 10px 10px 0 0
+        /*top, right, bottom, and left*/
+}
+
+.top {
+    /*Classe do button para subir a pagina*/
+    cursor: pointer;
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    display: none;
+}

@@ -1,0 +1,6 @@
+/vendor/
+/public/assets/logs/
+composer.lock
+.env
+01siteone.conf
+coremvc-bkp.sql

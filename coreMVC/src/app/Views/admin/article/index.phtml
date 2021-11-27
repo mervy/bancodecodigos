@@ -1,0 +1,63 @@
+<?php $this->renderView('menus/_admin_page');?>
+<div class="container">
+    <h2 class="card-title py-3">Articles</h2>
+
+    <?php
+        $this->renderView('alerts/_errors');
+        $this->renderView('alerts/_success');
+    ?>
+
+    <p class="text-end"><a href="/admin/create/article" class="btn btn-primary"><i class="bi bi-pencil-square"></i> Add new
+            articles</a></p>
+    <?php if (!empty($this->view->articles)): ?>
+    <table class="table table-striped custab article-admin sortable">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Image</th>
+                <th>Category</th>
+                <th>Author</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <?php
+        foreach ($this->view->articles as $art):
+            $data = ($art['created'] < $art['updated']) ? date("d/m/Y", strtotime($art['updated'])) : date("d/m/Y", strtotime($art['created']));
+            $hora = ($art['created'] < $art['updated']) ? date("h:i A", strtotime($art['updated'])) : date("h:i A", strtotime($art['created']))
+            ?>
+        <tr>
+            <td><?= $art['id'] ?></td>
+            <td><?= $data . ' -' . $art['title'] ?></td>
+            <td><img src="/assets/uploads/articles/thumbs.php?i=<?= $this->helper->urlSEO($art['title'], '-') . '/' . $art['image'] ?>&w=80&h=40">
+            </td>
+            <td><?= $art['caName'] ?></td>
+            <td><?= $art['auName'] ?></td>
+            <td>
+                <a class='btn btn-success btn-sm' href="/admin/preview/<?= $art['id'] ?>" target="_blank"><i class="fa fa-eye"></i> Preview</a>
+                <a class='btn btn-info btn-sm' href="/admin/edit/article/<?= $art['id'] ?>"><span class="fa fa-pencil-square-o"></span> Edit</a>
+                <script>
+                    function delArticle(id) {
+                        var r = confirm("Tem certeza que quer deletar?");
+                        if (r == true) {
+                            window.location.href = "/admin/delete/article/" + id;
+                        } else {
+                            window.location.href = "/admin";
+                        }
+                    }
+                </script>
+                <button class="btn btn-danger btn-sm" onclick="delArticle(<?= $art['id'] ?>)"><i class="fa fa-trash-o"></i> Del</button>
+                <a href="/admin/approve/articles/<?= $art['id'] ?>" class="btn btn-warning btn-sm">
+                    <span class="fa fa-thumbs-o-<?php echo ($art['status'] == "yes") ? 'up' : 'down' ?> "></span>
+                    <?php echo ($art['status'] == "yes") ? 'Approve' : 'Disapprove' ?> </a>
+            </td>
+        </tr>
+        <?php endforeach; ?>
+    </table>
+    <?php else: ?>
+    <p>Não há artigos a listar!!</p>
+    <?php endif; ?>
+
+    <?php $this->renderView('menus/_pagination'); ?>
+    
+</div>

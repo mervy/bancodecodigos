@@ -1,0 +1,41 @@
+<?php $this->renderView('menus/_admin_page');?>
+<div class="container">
+    <div class="row col-md-10 col-md-offset-1 custyle">
+        <div class="page-header">
+            <h2 class="card-title py-3">Visitors by IP</h2>
+        </div>
+        <?php if (!empty($this->view->visitor)): ?>
+        <table class="table table-striped custab sortable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>Id_title</th>
+                    <th>IP</th>
+                    <th>Acessed in</th>
+                    <th class="text-center">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($this->view->visitor as $vis): ?>
+                <tr>
+                    <td><?= $vis['viId'] ?></td>
+                    <td><?= $vis['title'] ?></td>
+                    <td><?= $vis['articles_id'] ?></td>
+                    <td><?= $vis['ip'] ?></td>
+                    <td><?= $vis['acessed_in'] ?></td>
+                    <td class="text-center">
+                        <a href="/admin/delete/visitor/<?= $vis['viId'] ?>" class="btn btn-danger btn-xs" onclick="confirm('Tem certeza que quer excluir?')"><span class="glyphicon glyphicon-remove"></span> Del</a>
+                    </td>
+                </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+        <?php else: ?>
+        <p>Não houve visitas!</p>
+        <?php endif; ?>
+        
+        <?php $this->renderView('menus/_pagination'); ?>
+
+    </div>
+</div>

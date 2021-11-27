@@ -1,0 +1,22 @@
+Options -Indexes
+ErrorDocument 403 http://phptips.localhost/reescrita-de-URLs-com-HTACCESS/testes/403.html
+
+RewriteEngine On
+
+#se escrever lorem redireciona para teste.php
+RewriteRule lorem ./teste.php
+
+# NC ignora case sensitive
+RewriteRule ^wdev$ ./index.php [NC]
+
+#Redireciona ao digitar google na URL
+RewriteRule google https://www.google.com [NC,R=302]
+
+RewriteRule ^painel/([a-z0-9]+)/?$ ./admin.php?controller=$1 [NC]
+
+RewriteRule ^painel/([a-z0-9]+)/([a-z0-9]+)/?$ ./admin.php?controller=$1&action=$2 [NC]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+#Só isso abaixo gera um looping e dá Internal Server Error, tem q por a diretiva acima
+RewriteRule ^(.*)$ ./router.php
